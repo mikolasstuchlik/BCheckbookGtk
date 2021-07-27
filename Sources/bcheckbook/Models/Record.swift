@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Record: Identifiable, ObservableObject, Codable {
+class Record: Identifiable, Codable {
     let id: String
-    @Published var event: Event
+    var event: Event
     var previousRecord: Record? = nil
     
     var balance: Double {

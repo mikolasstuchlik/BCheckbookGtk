@@ -7,8 +7,9 @@
 
 import Foundation
 
-class Records: ObservableObject {
-    @Published var items: [Record] {
+class Records {
+    let shared = Records()
+    var items: [Record] {
         didSet {
             sortedRecords.forEach { record in
                 record.previousRecord = items.element(before: record)
@@ -22,7 +23,7 @@ class Records: ObservableObject {
         }
     }
     
-    init(withRecords records: [Record] = []) {
+    private init(withRecords records: [Record] = []) {
         items = records
         
         guard !records.isEmpty && records.count > 1 else { return }

@@ -5,7 +5,7 @@ let status = Application.run(startupHandler: nil) { app in
     window.title = "Hello, World!"
     window.setDefaultSize(width: 320, height: 240)
     let label = LabelRef(str: "Hello, World!")
-    window.add(widet: label)
+    window.add(widget: label)
     window.showAll()
 }
 
@@ -14,5 +14,5 @@ guard let status = status else {
 }
 
 guard status == 0 else {
-    fatalErr("Application exited with status \(status)")
+    fatalError("Application exited with status \(status)")
 }
