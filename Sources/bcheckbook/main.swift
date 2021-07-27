@@ -35,6 +35,54 @@ let status = Application.run(startupHandler: nil) { app in
     }
     listView.append(columns)
     window.add(widget: listView)
+    for record in Records.shared.sortedRecords {
+        switch record.event.type {
+            case .deposit: 
+                if let checkNumber = record.event.checkNumber {
+                    store.append(asNextRow: iterator, 
+                    Event.DF.string(from: record.event.date), 
+                    "\(checkNumber)", 
+                    record.event.isReconciled,
+                    record.event.vendor,
+                    record.event.memo,
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!,
+                    "N/A",
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)
+                } else {
+                    store.append(asNextRow: iterator, 
+                    Event.DF.string(from: record.event.date), 
+                    "N/A", 
+                    record.event.isReconciled,
+                    record.event.vendor,
+                    record.event.memo,
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!,
+                    "N/A",
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)
+                }
+            case .withdrawal:
+                if let checkNumber = record.event.checkNumber {
+                    store.append(asNextRow: iterator, 
+                    Event.DF.string(from: record.event.date), 
+                    "\(checkNumber)", 
+                    record.event.isReconciled,
+                    record.event.vendor,
+                    record.event.memo,
+                    "N/A",
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!,
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)
+                } else {
+                    store.append(asNextRow: iterator, 
+                    Event.DF.string(from: record.event.date), 
+                    "N/A", 
+                    record.event.isReconciled,
+                    record.event.vendor,
+                    record.event.memo,
+                    "N/A",
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!,
+                    Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)
+                }
+        }
+    }
     window.showAll()
 }
 
