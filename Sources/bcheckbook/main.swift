@@ -47,7 +47,7 @@ let status = Application.run(startupHandler: nil) { app in
                     "\(record.event.memo)",
                     "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!)",
                     "N/A",
-                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)"
+                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)")
                 } else {
                     store.append(asNextRow: iterator, 
                     "\(Event.DF.string(from: record.event.date))", 
@@ -57,7 +57,7 @@ let status = Application.run(startupHandler: nil) { app in
                     "\(record.event.memo)",
                     "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!)",
                     "N/A",
-                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)"
+                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)")
                 }
             case .withdrawal:
                 if let checkNumber = record.event.checkNumber {
@@ -69,7 +69,7 @@ let status = Application.run(startupHandler: nil) { app in
                     "\(record.event.memo)",
                     "N/A",
                     "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!)",
-                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)"
+                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)")
                 } else {
                     store.append(asNextRow: iterator, 
                     "\(Event.DF.string(from: record.event.date))", 
@@ -79,7 +79,7 @@ let status = Application.run(startupHandler: nil) { app in
                     "\(record.event.memo)",
                     "N/A",
                     "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!)",
-                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)"
+                    "\(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!)")
                 }
         }
     }
