@@ -8,7 +8,7 @@
 import Foundation
 
 class Records {
-    let shared = Records()
+    static let shared = Records()
     var items: [Record] {
         didSet {
             sortedRecords.forEach { record in
