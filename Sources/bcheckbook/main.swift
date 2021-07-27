@@ -1,6 +1,9 @@
 import Gtk
 import GLibObject
 import CGtk
+import Foundation
+
+let TEST_FILE = URL(fileURLwithPath: "~/transactions.bcheck").standardizedFileURL
 
 let status = Application.run(startupHandler: nil) { app in
     let window = ApplicationWindowRef(application: app)
