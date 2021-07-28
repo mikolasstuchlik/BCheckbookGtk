@@ -3,7 +3,7 @@ import GLibObject
 import CGtk
 import Foundation
 
-let TEST_FILE = URL(fileURLWithPath: "~/transactions.bcheck").standardizedFileURL
+let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
 
 if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
     for record in STORED_RECORDS {
