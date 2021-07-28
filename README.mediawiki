@@ -1,0 +1,15 @@
+=BCheckbook=
+
+'''Version:''' 0.1
+
+'''Author:''' Bryce Campbell
+
+'''Copyright:''' 2021
+
+'''Description:''' A simple checkbook ledger that can be used on your computer and on the go without an Internet connection.
+
+'''License:''' see LICENSE
+
+==Notes==
+
+This is a port of the <a href="https://github.com/bryceac/BCheckbook">original application</a> that was made for macOS and iOS for use on Linux system
