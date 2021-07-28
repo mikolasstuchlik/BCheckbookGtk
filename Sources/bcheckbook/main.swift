@@ -3,6 +3,14 @@ import GLibObject
 import CGtk
 import Foundation
 
+let TEST_FILE = URL(fileURLWithPath: "~/transactions.bcheck").standardizedFileURL
+
+if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
+    for record in STORED_RECORDS {
+        Records.shared.add(record)
+    }
+}
+
 let status = Application.run(startupHandler: nil) { app in
     let window = ApplicationWindowRef(application: app)
     window.title = "Hello, World!"
@@ -12,7 +20,7 @@ let status = Application.run(startupHandler: nil) { app in
     window.showAll() */
     let iterator = TreeIter()
     let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
-    var listView = ListView(model: store)
+    let listView = ListView(model: store)
     let columns = [
         ("Date", "text", CellRendererText()),
         ("Check #", "text", CellRendererText()),
@@ -27,15 +35,23 @@ let status = Application.run(startupHandler: nil) { app in
     }
     listView.append(columns)
     window.add(widget: listView)
-    store.append(asNextRow: iterator, 
-    "2021-7-27",
-    "1260",
-    false,
-    "Sam Hill Credit Union",
-    "Open Account",
-    "$500",
-    "N/A",
-    "$500")
+    for record in Records.shared.sortedRecords {
+        switch record.event.type {
+            case .deposit:
+                if let checkNumber = record.event.checkNumber {
+                    store.append(asNextRow: iterator,
+                    Value(Event.DF.string(from: record.event.date)),
+                    Value("\(checkNumber)"),
+                    Value(record.event.isReconciled),
+                    Value(record.event.vendor),
+                    Value(record.event.memo),
+                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!),
+                    "N/A",
+                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!))
+                }
+            case .withdrawal: ()
+        }
+    }
     window.showAll()
 }
 
