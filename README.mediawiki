@@ -12,4 +12,52 @@
 
 ==Notes==
 
-This is a port of the <a href="https://github.com/bryceac/BCheckbook">original application</a> that was made for macOS and iOS for use on Linux system
+This is a port of the <a href="https://github.com/bryceac/BCheckbook">original application</a> that was made for macOS and iOS for use on Linux systems and has been tested in Devuan Beowulf (aka. Debian 10) with GTK 3 and Swift 5.4.
+
+While this <strong>may</strong> work on a Mac, I strongly recommend buying either the iOS version or the macOS version from the respective app stores, as they actually function, with some issues that I cannot figure out at this time, especially because I was able to verify my code for calculations and such were working otherwise.
+
+Not only would the experience be a little better on macOS and iOS, but it can help me out financially and you <strong>should</strong> be able to get both the iOS and Mac app after only buying one version.
+
+===Questions===
+
+<ol>
+<li>
+<dl>
+<dt style="font-weight:bold">Why create this port now? I thought you were going to wait for OrbTk, according to this <a href="https://github.com/bryceac/rcheckbook">repository</a>?</dt>
+<dd>
+<p>While this was the initial plan, as I wanted the application to work on both Windows and Linux, seeing as using Rust is a much better experience than Swift when you program on Windows.</p>
+<p>However, due to missing widgets and no real good documentation, I started looking at GTK and found a <a href="https://github.com/rhx/SwiftGtk">library</a> from Rene Hexel that allowed me to take the Swift code I had and reuse it, with some minor modifications, and create a version using GTK in a manner that was a bit simpler than it would have been in Rust.</p>
+<p>As a result, I decided to take on the challenge of making a Linux GUI application in Swift.</p>
+</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt style="font-weight:bold">Are you going to release this on Windows?</dt>
+<dd>
+<p>While I am not particularly fond of Windows, especially because temporary environment variables are a big pain in Windows, I would like release this on Windows, so that users have a more friendly application to use than a CLI-based application.</p>
+<p>Right now, I am only focusing on getting things to work, though I have found information stating it is possible to compile Swift programs on Linux for Windows, which would be a big boon, in comparison of going through the hassles of getting the native Swift toolchain for Windows working.</p>
+<p>If you want to help speed things along, however, feel free to try and compile a Windows binary.</p>
+</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt style="font-weight:bold">Do you plan to sell this program, like you are selling a version for macOS and iOS?</dt>
+<dd>
+<p>While I would love to make money from this application, as it does help allow users to read and load their saves from iOS or macOS, I am of the mind that people should only ever have to pay for an application once.</p>
+<p>For example, if they buy an application on Android, they should get the iOS, macOS, and Windows version for free and the same on any other platform.</p>
+<p>Yes, this is not feasible, unless you do something like Plex and their Plex pass subscription, not to mention equipment is not free, even if an operating system can be freely obtained, but I think that is ultimately what people want.</p>
+<p>Sadly, this buy only once is only possible under a few conditions, such as only desktop applications.</p>
+<p>The other thing making me a little leery about making money from this application, aside from not being able to give users who bought the iOS or macOS version for free, is that I have not really looked into ways to make money off applications like this, though I might do that when the program is in a desirable state.</p>
+<p>In other words, I do not plan to make money off this port at this time.</p>
+</dd>
+</dl>
+</li>
+</ol>
+
+===Plans===
+
+As this is currently a <abbr title="Work in Progress">WIP</abbr>, the current plan mainly involves getting basic functionality in place, like allowing users to select a save file, rather than hard coding one in, and, like the macOS application, allow editing the contents in the ListView.
+
+After that I plan to try and keep this program in sync with the Mac and iOS version as much as possible, due to how differently Swift acts in a Linux environment in some places.
