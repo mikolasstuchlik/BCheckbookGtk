@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <!-- main window object -->
+    <object class="GtkWindow" id="window">
+        <property name="visible">True</property>
+        <property name="title">Hello, World!</property>
+        <property name="border-width">10</property>
+        <child>
+            <!-- create scroll view container -->
+            <object class="GtkScrolledWindow" id="scrollView">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                    <!-- create the list view -->
+                    <object class="GtkTreeView" id="treeView">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="dateColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Date</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="checkNumberColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Check #</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="reconciledColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Reconciled</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="vendorColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Vendor</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="memoColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Memo</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="depositColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Deposit</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="withdrawalColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Withdrawal</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkTreeViewColumn" id="balanceColumn">
+                                <property name="visible">True</property>
+                                <property name="title">Balance</property>
+                            </object>
+                        </child>
+                    </object> <!-- end of list view -->
+                </child>
+            </object> <!-- close scroll view container -->
+        </child>
+    </object> <!-- close main window -->
+</interface>

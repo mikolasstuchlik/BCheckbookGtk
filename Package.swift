@@ -14,7 +14,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "bcheckbook",
-            dependencies: ["Gtk"]),
+            dependencies: ["Gtk"],
+            resources: [
+                .process("Resources/window.ui"),
+                .process("Resources/menus.ui")
+            ]),
         .testTarget(
             name: "bcheckbookTests",
             dependencies: ["bcheckbook"]),

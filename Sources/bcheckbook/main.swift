@@ -1,6 +1,9 @@
 import Gtk
 import GLibObject
 import CGtk
+import GLib
+import GLibObject
+import GIO
 import Foundation
 
 let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
@@ -11,13 +14,22 @@ if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
     }
 }
 
-let status = Application.run(startupHandler: nil) { app in
+let status = Application.run(startupHandler: { app in
+    if let builder = Builder("menus") {
+        app.menubar = builder.get("menubar", MenuModelRef.init)
+    }
+}) { app in
+    guard let builder = Builder("window") else {
+        print("Could not build the application user interface")
+        app.quit()
+        return
+    }
     let window = ApplicationWindowRef(application: app)
+    window.showAll()
+    /* let window = ApplicationWindowRef(application: app)
     window.title = "Hello, World!"
     window.setDefaultSize(width: 320, height: 240)
-    /* let label = LabelRef(str: "Hello, World!")
-    window.add(widget: label)
-    window.showAll() */
+    
     let iterator = TreeIter()
     let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
     let listView = ListView(model: store)
@@ -83,7 +95,7 @@ let status = Application.run(startupHandler: nil) { app in
                 }
         }
     }
-    window.showAll()
+    window.showAll() */
 }
 
 guard let status = status else {
