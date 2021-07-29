@@ -15,48 +15,96 @@
                         <object class="GtkTreeViewColumn" id="dateColumn">
                             <property name="visible">True</property>
                             <property name="title">Date</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="checkNumberColumn">
                             <property name="visible">True</property>
                             <property name="title">Check #</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="reconciledColumn">
                             <property name="visible">True</property>
                             <property name="title">Reconciled</property>
+                            <child>
+                                <object class="GtkCellRendererToggle">
+                                    <property name="visible">True</property>
+                                    <property name="activatable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="vendorColumn">
                             <property name="visible">True</property>
                             <property name="title">Vendor</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="memoColumn">
                             <property name="visible">True</property>
                             <property name="title">Memo</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="depositColumn">
                             <property name="visible">True</property>
                             <property name="title">Deposit</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="withdrawalColumn">
                             <property name="visible">True</property>
                             <property name="title">Withdrawal</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">True</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
                         <object class="GtkTreeViewColumn" id="balanceColumn">
                             <property name="visible">True</property>
                             <property name="title">Balance</property>
+                            <child>
+                                <object class="GtkCellRendererText">
+                                    <property name="visible">True</property>
+                                    <property name="editable">False</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                 </object> <!-- end of list view -->
