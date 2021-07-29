@@ -6,17 +6,17 @@ import GLibObject
 import GIO
 import Foundation
 
-let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
+/* let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
 
 if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
     for record in STORED_RECORDS {
         Records.shared.add(record)
     }
-}
+} */
 
 let status = Application.run(startupHandler: { app in
     if let builder = Builder("menus") {
-        app.menubar = builder.get("menubar", MenuModelRef.init)
+        app.menubar = builder.get("menuBar", MenuModelRef.init)
     }
 }) { app in
     guard let builder = Builder("window") else {
@@ -25,14 +25,14 @@ let status = Application.run(startupHandler: { app in
         return
     }
     let window = ApplicationWindowRef(application: app)
-    window.showAll()
-    /* let window = ApplicationWindowRef(application: app)
     window.title = "Hello, World!"
     window.setDefaultSize(width: 320, height: 240)
     
     let iterator = TreeIter()
-    let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
-    let listView = ListView(model: store)
+    // let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
+    let listView = builder.get("treeView", TreeViewRef.init)
+    window.showAll()
+    /* let listView = ListView(model: store)
     let columns = [
         ("Date", "text", CellRendererText()),
         ("Check #", "text", CellRendererText()),

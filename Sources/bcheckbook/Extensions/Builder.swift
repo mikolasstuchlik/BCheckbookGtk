@@ -8,7 +8,7 @@ import GIO
 extension Builder {
     public convenience init?(_ resource: String) {
         self.init()
-        guard let filepath = Bundle.main.path(forResource: resource, ofType: "ui") else {
+        guard let filepath = Bundle.module.path(forResource: resource, ofType: "ui") else {
             return nil
         }
 
