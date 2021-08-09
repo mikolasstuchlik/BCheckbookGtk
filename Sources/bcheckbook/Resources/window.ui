@@ -4,7 +4,7 @@
         <object class="GtkListStore" id="liststore">
             <columns>
                 <column type="gchararray"/>
-                <column type="gint"/>
+                <column type="gchararray"/>
                 <column type="gboolean"/>
                 <column type="gchararray"/>
                 <column type="gchararray"/>
