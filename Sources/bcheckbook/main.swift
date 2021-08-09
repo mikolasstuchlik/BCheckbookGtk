@@ -29,7 +29,7 @@ let status = Application.run(startupHandler: { app in
     window.setDefaultSize(width: 320, height: 240)
     
     let iterator = TreeIter()
-    // let listStore = builder.get("liststore", ListStoreRef.init)
+    let store = builder.get("store", ListStoreRef.init)
     // let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
     let listView = builder.get("treeView", TreeViewRef.init)
 
