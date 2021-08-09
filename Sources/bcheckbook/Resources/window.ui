@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+        <!-- create list store, to handle models -->
+        <object class="GtkListStore" id="liststore">
+            <columns>
+                <column type="gchararray"/>
+                <column type="gint"/>
+                <column type="gboolean"/>
+                <column type="gchararray"/>
+                <column type="gchararray"/>
+                <column type="gchararray"/>
+                <column type="gchararray"/>
+                <column type="gchararray"/>
+            </columns>
+        </object>
         <!-- create scroll view container -->
          <object class="GtkScrolledWindow" id="scrollView">
             <property name="visible">True</property>
@@ -11,6 +24,7 @@
                 <object class="GtkTreeView" id="treeView">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="model">liststore</property>
                     <child>
                         <object class="GtkTreeViewColumn" id="dateColumn">
                             <property name="visible">True</property>
