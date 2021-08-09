@@ -6,13 +6,13 @@ import GLibObject
 import GIO
 import Foundation
 
-/* let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
+let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
 
 if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
     for record in STORED_RECORDS {
         Records.shared.add(record)
     }
-} */
+}
 
 let status = Application.run(startupHandler: { app in
     if let builder = Builder("menus") {
@@ -32,6 +32,7 @@ let status = Application.run(startupHandler: { app in
     // let listStore = builder.get("liststore", ListStoreRef.init)
     // let store = ListStore(.string, .string, .boolean, .string, .string, .string, .string, .string)
     let listView = builder.get("treeView", TreeViewRef.init)
+
     window.showAll()
     /* let listView = ListView(model: store)
     let columns = [
