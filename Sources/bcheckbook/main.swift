@@ -28,10 +28,12 @@ let status = Application.run(startupHandler: { app in
     window.title = "Hello, World!"
     window.setDefaultSize(width: 320, height: 240)
     
+    let scrollView = builder.get("scrollView", ScrolledWindowRef.init)
     let iterator = TreeIter()
     let store = builder.get("store", Gtk.ListStoreRef.init)
     // let listView = builder.get("treeView", TreeViewRef.init)
 
+    window.add(widget: scrollView)
     window.showAll()
     /* let listView = ListView(model: store)
     let columns = [
