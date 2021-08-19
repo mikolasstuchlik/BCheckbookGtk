@@ -31,36 +31,7 @@ let status = Application.run(startupHandler: { app in
     let scrollView = builder.get("scrollView", ScrolledWindowRef.init)
     let iterator = TreeIter()
     let store = ListStore(builder.get("store", Gtk.ListStoreRef.init).list_store_ptr)!
-    let listView = builder.get("treeView", TreeViewRef.init)
-
-    var selectedRows: [Int] {
-        var storage = UnsafeMutablePointer<GtkTreeModel>?.none
-        var list: ListRef?
-        withUnsafeMutablePointer(to: &storage) { ptr in
-            list = listView.getSelection().getSelectedRows(model: ptr)
-        }
-
-        guard let list = list else { return [] }
-
-        var indices = [Int]()
-
-        list.forEach { ptr in
-            let index = Int(TreePathRef(raw: ptr).getIndices().pointee)
-
-            indices.append(index)
-        }
-        g_list_free_full(list._ptr) {
-            gtk_tree_path_free($0!.assumingMemoryBound(to: GtkTreePath.self))
-        }
-
-        return indices
-    }
-
-    var selectedRoe: Int? {
-        guard !selectedRows.isEmpty else { return nil }
-
-        return selectedRows.first!
-    }
+    // let listView = builder.get("treeView", TreeViewRef.init)
 
     window.add(widget: scrollView)
     for record in Records.shared.sortedRecords {
