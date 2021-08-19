@@ -1,14 +1,14 @@
 import Gtk
 import CGtk
 import GLibObject
-import Glib
+import GLib
 
 extension TreeViewProtocol {
     var selectedRows: [Int] {
         var storage = UnsafeMutablePointer<GtkTreeModel>?.none
         var list: ListRef?
         withUnsafeMutablePointer(to: &storage) { ptr in
-            list = listView.getSelection().getSelectedRows(model: ptr)
+            list = self.getSelection().getSelectedRows(model: ptr)
         }
 
         guard let list = list else { return [] }

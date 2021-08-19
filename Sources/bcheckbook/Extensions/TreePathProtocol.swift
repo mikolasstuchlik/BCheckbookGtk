@@ -1,7 +1,7 @@
 import Gtk
 import CGtk
 import GLibObject
-import Glib
+import GLib
 
 extension TreePathProtocol {
     var index: Int {
