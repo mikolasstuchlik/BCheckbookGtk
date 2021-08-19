@@ -25,7 +25,7 @@ public extension TreeViewProtocol {
         return indices
     }
 
-    var selectedRoe: Int? {
+    var selectedRow: Int? {
         guard !self.selectedRows.isEmpty && self.selectedRows.count == 1 else { return nil }
 
         return self.selectedRows.first!
