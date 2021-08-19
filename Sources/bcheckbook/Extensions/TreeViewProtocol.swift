@@ -28,6 +28,6 @@ extension TreeViewProtocol {
     var selectedRoe: Int? {
         guard !self.selectedRows.isEmpty && self.selectedRows.count == 1 else { return nil }
 
-        return selectedRows.first!
+        return self.selectedRows.first!
     }
 }
