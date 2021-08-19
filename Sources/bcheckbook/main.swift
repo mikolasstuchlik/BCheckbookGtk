@@ -31,7 +31,36 @@ let status = Application.run(startupHandler: { app in
     let scrollView = builder.get("scrollView", ScrolledWindowRef.init)
     let iterator = TreeIter()
     let store = ListStore(builder.get("store", Gtk.ListStoreRef.init).list_store_ptr)!
-    // let listView = builder.get("treeView", TreeViewRef.init)
+    let listView = builder.get("treeView", TreeViewRef.init)
+
+    var selectedRows: [Int] {
+        var storage = UnsafeMutablePointer<GtkTreeModel>?.none
+        var list: ListRef?
+        withUnsafeMutablePointer(to: &storage) { ptr in
+            list = listView.getSelection().getSelectedRows(model: ptr)
+        }
+
+        guard let list = list else { return [] }
+
+        var indices = [Int]()
+
+        list.forEach { ptr in
+            let index = Int(TreePathRef(raw: ptr).getIndices().pointee)
+
+            indices.append(index)
+        }
+        g_list_free_full(list._ptr) {
+            gtk_tree_path_free($0!.assumingMemoryBound(to: GtkTreePath.self))
+        }
+
+        return indices
+    }
+
+    var selectedRoe: Int? {
+        guard !selectedRows.isEmpty else { return nil }
+
+        return selectedRows.first!
+    }
 
     window.add(widget: scrollView)
     for record in Records.shared.sortedRecords {
@@ -83,70 +112,6 @@ let status = Application.run(startupHandler: { app in
         }
     }
     window.showAll()
-    /* let listView = ListView(model: store)
-    let columns = [
-        ("Date", "text", CellRendererText()),
-        ("Check #", "text", CellRendererText()),
-        ("Reconciled", "active", CellRendererToggle()),
-        ("Vendor", "text", CellRendererText()),
-        ("Memo", "text", CellRendererText()),
-        ("Deposit", "text", CellRendererText()),
-        ("Withdrawal", "text", CellRendererText()),
-        ("Balance", "text", CellRendererText())
-    ].enumerated().map {(i: Int, c:(title: String, kind: PropertyName, renderer: CellRenderer)) in
-        TreeViewColumn(i, title: c.title, renderer: c.renderer, attribute: c.kind)
-    }
-    listView.append(columns)
-    window.add(widget: listView)
-    for record in Records.shared.sortedRecords {
-        switch record.event.type {
-            case .deposit:
-                if let checkNumber = record.event.checkNumber {
-                    store.append(asNextRow: iterator,
-                    Value(Event.DF.string(from: record.event.date)),
-                    Value("\(checkNumber)"),
-                    Value(record.event.isReconciled),
-                    Value(record.event.vendor),
-                    Value(record.event.memo),
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!),
-                    "N/A",
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!))
-                } else {
-                    store.append(asNextRow: iterator,
-                    Value(Event.DF.string(from: record.event.date)),
-                    "N/A",
-                    Value(record.event.isReconciled),
-                    Value(record.event.vendor),
-                    Value(record.event.memo),
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!),
-                    "N/A",
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!))
-                }
-            case .withdrawal:
-                if let checkNumber = record.event.checkNumber {
-                    store.append(asNextRow: iterator,
-                    Value(Event.DF.string(from: record.event.date)),
-                    Value("\(checkNumber)"),
-                    Value(record.event.isReconciled),
-                    Value(record.event.vendor),
-                    Value(record.event.memo),
-                    "N/A",
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!),
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!))
-                } else {
-                    store.append(asNextRow: iterator,
-                    Value(Event.DF.string(from: record.event.date)),
-                    "N/A",
-                    Value(record.event.isReconciled),
-                    Value(record.event.vendor),
-                    Value(record.event.memo),
-                    "N/A",
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.event.amount))!),
-                    Value(Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance))!))
-                }
-        }
-    }
-    window.showAll() */
 }
 
 guard let status = status else {
