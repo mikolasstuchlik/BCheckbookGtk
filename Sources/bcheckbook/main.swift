@@ -6,6 +6,10 @@ import GLibObject
 import GIO
 import Foundation
 
+var appActionEntries = [
+    GActionEntry(name: g_strdup("quit"), activate: { Gtk.ApplicationRef(gpointer: $2).quit() }, parameter_type: nil, state: nil, change_state: nil, padding: (0, 0, 0))
+]
+
 let TEST_FILE = URL(fileURLWithPath: "/home/bryce/transactions.bcheck").standardizedFileURL
 
 if let STORED_RECORDS = try? Record.load(from: TEST_FILE) {
@@ -24,6 +28,7 @@ let status = Application.run(startupHandler: { app in
         app.quit()
         return
     }
+    app.addAction(entries: &appActionEntries, nEntries: appActionEntries.count, userData: app.ptr)
     let window = ApplicationWindowRef(application: app)
     window.title = "Hello, World!"
     window.setDefaultSize(width: 320, height: 240)
