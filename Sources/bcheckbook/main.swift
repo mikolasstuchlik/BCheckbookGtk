@@ -36,13 +36,31 @@ let status = Application.run(startupHandler: { app in
     let scrollView = builder.get("scrollView", ScrolledWindowRef.init)
     let iterator = TreeIter()
     let store = ListStore(builder.get("store", Gtk.ListStoreRef.init).list_store_ptr)!
-    /* let checkNumberColumn = builder.get("checkNumberColumn", TreeViewColumnRef.init)
+    // let checkNumberColumn = builder.get("checkNumberColumn", TreeViewColumnRef.init)
     let reconciledColumn = builder.get("reconciledColumn", TreeViewColumnRef.init)
-    let vendorColumn = builder.get("vendorColumn", TreeViewColumnRef.init)
+    /* let vendorColumn = builder.get("vendorColumn", TreeViewColumnRef.init)
     let memoColumn = builder.get("memoColumn", TreeViewColumnRef.init)
     let depositColumn = builder.get("depositColumn", TreeViewColumnRef.init)
-    let withdrawalColumn = builder.get("withdrawalColumn", TreeViewColumnRef.init)
-    let listView = builder.get("treeView", TreeViewRef.init) */
+    let withdrawalColumn = builder.get("withdrawalColumn", TreeViewColumnRef.init) */
+    let listView = builder.get("treeView", TreeViewRef.init)
+
+    /* reconciledColumn.connect(signal: ObjectSignalName(rawValue: "toggled")!, data: nil) {
+        guard let selectedRowIndex = listView.selectedRow else { return }
+        let RECORD_ID = Records.shared.sortedRecords[selectedRowIndex].id
+
+        guard let record = Records.shared.items.first(where: { $0.id == RECORD_ID }) else { return }
+
+        record.event.isReconciled.toggle()
+    } */
+
+    reconciledColumn.connect(signal: ObjectSignalName(rawValue: "toggled")!, handler: {
+        guard let selectedRowIndex = listView.selectedRow else { return }
+        let RECORD_ID = Records.shared.sortedRecords[selectedRowIndex].id
+
+        guard let record = Records.shared.items.first(where: { $0.id == RECORD_ID }) else { return }
+
+        record.event.isReconciled.toggle()
+    })
 
     window.add(widget: scrollView)
     for record in Records.shared.sortedRecords {
