@@ -3,8 +3,8 @@ import CGtk
 import GLibObject
 import GLib
 
-extension TreeModelProtocol {
-    func iterator(for index: Int) -> TreeIter? {
+public extension TreeModelProtocol {
+    public func iterator(for index: Int) -> TreeIter? {
         var element = gint(index)
 
         let path = TreePath(indicesv: &element, length: 1)
@@ -15,15 +15,15 @@ extension TreeModelProtocol {
         return iter
     }
 
-    var count: Int {
+    public var count: Int {
         return self.iterNChildren(iter: nil)
     }
 
-    var last: TreeIter? {
+    public var last: TreeIter? {
         self.iterator(for: self.count - 1)
     }
 
-    var first: TreeIter? {
+    public var first: TreeIter? {
         self.iterator(for: 0)
     }
 }

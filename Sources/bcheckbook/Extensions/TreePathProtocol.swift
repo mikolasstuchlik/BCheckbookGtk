@@ -3,7 +3,7 @@ import CGtk
 import GLibObject
 import GLib
 
-extension TreePathProtocol {
+public extension TreePathProtocol {
     var index: Int {
         return Int(self.getIndices().pointee)
     }

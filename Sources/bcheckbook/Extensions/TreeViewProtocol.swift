@@ -3,7 +3,7 @@ import CGtk
 import GLibObject
 import GLib
 
-extension TreeViewProtocol {
+public extension TreeViewProtocol {
     var selectedRows: [Int] {
         var storage = UnsafeMutablePointer<GtkTreeModel>?.none
         var list: ListRef?
