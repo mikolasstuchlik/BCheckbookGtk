@@ -31,7 +31,13 @@ let status = Application.run(startupHandler: { app in
     let scrollView = builder.get("scrollView", ScrolledWindowRef.init)
     let iterator = TreeIter()
     let store = ListStore(builder.get("store", Gtk.ListStoreRef.init).list_store_ptr)!
-    // let listView = builder.get("treeView", TreeViewRef.init)
+    /* let checkNumberColumn = builder.get("checkNumberColumn", TreeViewColumnRef.init)
+    let reconciledColumn = builder.get("reconciledColumn", TreeViewColumnRef.init)
+    let vendorColumn = builder.get("vendorColumn", TreeViewColumnRef.init)
+    let memoColumn = builder.get("memoColumn", TreeViewColumnRef.init)
+    let depositColumn = builder.get("depositColumn", TreeViewColumnRef.init)
+    let withdrawalColumn = builder.get("withdrawalColumn", TreeViewColumnRef.init)
+    let listView = builder.get("treeView", TreeViewRef.init) */
 
     window.add(widget: scrollView)
     for record in Records.shared.sortedRecords {
