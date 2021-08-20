@@ -37,12 +37,12 @@ let status = Application.run(startupHandler: { app in
     let iterator = TreeIter()
     let store = ListStore(builder.get("store", Gtk.ListStoreRef.init).list_store_ptr)!
     // let checkNumberColumn = builder.get("checkNumberColumn", TreeViewColumnRef.init)
-    let reconciledColumn = builder.get("reconciledColumn", TreeViewColumnRef.init)
+    //let reconciledColumn = builder.get("reconciledColumn", TreeViewColumnRef.init)
     /* let vendorColumn = builder.get("vendorColumn", TreeViewColumnRef.init)
     let memoColumn = builder.get("memoColumn", TreeViewColumnRef.init)
     let depositColumn = builder.get("depositColumn", TreeViewColumnRef.init)
     let withdrawalColumn = builder.get("withdrawalColumn", TreeViewColumnRef.init) */
-    let listView = builder.get("treeView", TreeViewRef.init)
+    //let listView = builder.get("treeView", TreeViewRef.init)
 
     /* reconciledColumn.connect(signal: ObjectSignalName(rawValue: "toggled")!, data: nil) {
         guard let selectedRowIndex = listView.selectedRow else { return }
@@ -53,6 +53,9 @@ let status = Application.run(startupHandler: { app in
         record.event.isReconciled.toggle()
     } */
 
+    
+    // This won't work since column does not have signal called toggles. You need to connect to the Renderer instance
+    /*
     reconciledColumn.connect(signal: ObjectSignalName(rawValue: "toggled")!, handler: {
         guard let selectedRowIndex = listView.selectedRow else { return }
         let RECORD_ID = Records.shared.sortedRecords[selectedRowIndex].id
@@ -61,6 +64,22 @@ let status = Application.run(startupHandler: { app in
 
         record.event.isReconciled.toggle()
     })
+    */
+
+    let toggleCell = builder.get("reconciledCellRenderer", CellRendererToggleRef.init)
+    toggleCell.onToggled { [store] _, string in
+        let path = TreePath(string: string)
+
+        // Modify the souce of truth of the application
+        let RECORD_ID = Records.shared.sortedRecords[path.index].id
+        guard let record = Records.shared.items.first(where: { $0.id == RECORD_ID }) else { return }
+        record.event.isReconciled.toggle()
+
+        // This is strong reference, only for PoC purposes.
+        // Modify the source of truth of the tree view
+        let iter = store.iterator(for: path.index)!
+        store.setValue(iter: iter, column: 2, value: Value(record.event.isReconciled))
+    }
 
     window.add(widget: scrollView)
     for record in Records.shared.sortedRecords {
